@@ -12,18 +12,30 @@ function Home() {
   ]
 
   const handleSearch = () => {
-
+    e.preventDefault();
+    alert(searchQuery);
+    setSearchQuery("");
   }
 
-  return (<div className="home">
+  return (
+  <div className="home">
 
     <form onSubmit={handleSearch} className="search-form">
-      <input type="text" placeholder="Search for movies..." className="search-input" value={searchQuery}/>
+      <input type="text" placeholder="Search for movies..." className="search-input" value={searchQuery} onChange={(e) => {
+        console.log(e.target.value)
+        setSearchQuery(e.target.value);
+      }}/>
       <button type="submit" className="search-button">Search</button>
     </form>
 
     <div className="movies-grid">
-      {movies.map(movie => <MovieCard movie={movie} key={movie.id}/>)}
+      {movies.map (
+        (movie) => 
+          movie.title.toLowerCase().startsWith(searchQuery) && (
+          <MovieCard movie={movie} key={movie.id}/>
+        )
+      )}
+      
     </div>
   </div>
   )
