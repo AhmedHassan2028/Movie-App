@@ -4,6 +4,13 @@ import { searchMovies } from "../services/api";
 import { getPopularMovies } from "../services/api";
 import "../css/Home.css"
 
+import Button from '@mui/material/Button';
+
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+
+
 
 function Home() {
 
@@ -54,14 +61,23 @@ function Home() {
   <div className="home">
 
     <form onSubmit={handleSearch} className="search-form">
-      <input type="text" placeholder="Search for movies..." className="search-input" value={searchQuery} onChange={(e) => {
-        console.log(e.target.value)
+      {/* <input type="text" placeholder="Search for movies..." className="search-input" value={searchQuery} onChange={(e) => {
         setSearchQuery(e.target.value);
-      }}/>
-      <button type="submit" className="search-button">Search</button>
+      }}/> */}
+      <Box
+      component="form"
+      sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}
+      noValidate
+      autoComplete="off"
+    >
+      <TextField id="outlined-basic" label="Outlined" variant="outlined" fullWidth value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}/>
+      <Input placeholder="Search for movies..." inputProps={ariaLabel} />
+    </Box>
+
+      <Button variant="contained" type="submit">Search</Button>
     </form>
-
-
+    
+    
 
 
   {loading ? (<p>Loading...</p>) : error ? (<p>{error}</p>) :

@@ -10,15 +10,16 @@ export const MovieProvider = ({children}) => {
 //We put favorites in a local storage, must be converted to JSON string to be placed in local storage
 
   useEffect(() => {
+    console.log("useEffect first time call")
     const storedFavs = localStorage.getItem("favorites")
-    if (storedFavs) setFavorites (JSON.parse(storedFavs))
+    if (storedFavs) setFavorites(JSON.parse(storedFavs))
   }, [])
 
   useEffect(() => {
     localStorage.setItem('favorites', JSON.stringify(favorites))
   }, [favorites])
 
-  const addToFavorites = (movie) => {
+  const addToFavorites = (movie) => { 
     setFavorites(prev => [...prev,movie])
   }
 
